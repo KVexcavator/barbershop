@@ -1,0 +1,60 @@
+<h2>Записаться :</h2>
+
+<p>Здесь вы можете заполнить форму, для записи к мастеру</p>
+<form action="/visit" method="post">
+		<div class="form-group row">
+		  <label class="col-sm-2 col-form-label col-form-label-sm"
+		   for="master">Выберите мастера</label>
+		  <select  name="master" class="custom-select my-1 mr-sm-2" id="master">
+		    <option selected> Мастер </option>
+		    <option value="Lenka Krivorukaya">Ленка Криворукая</option>
+		    <option value="Mariya Ivanobna">Мария Ивановна</option>
+		    <option value="Eduard Pedrilo">Эдуард Педрило</option>
+		    <option value="Slesar-Santehnik">Слесарь-сантежник</option>
+		  </select>
+		</div>
+  <div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label col-form-label-sm">Ваше имя</label>
+    <div class="col-sm-10">
+      <input type="text"  name="name" class="form-control form-control-sm" id="name" placeholder="Введите Ваше ямя здесь">
+  	</div>
+  </div>
+  <div class="form-group row">
+    <label for="pfone"class="col-sm-2 col-form-label col-form-label-sm">Ваш  номер телефона</label>
+    <div class="col-sm-10">
+      <input type="text"  name="pfone"  class="form-control form-control-sm" id="pfone" placeholder="Введите номер телефона здесь">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="data_time"class="col-sm-2 col-form-label col-form-label-sm">Дата и время</label>
+    <div class="col-sm-10">
+      <input type="text"  name="data_time" class="form-control form-control-sm" id="data_time" placeholder="Введите дату и время, например : 16 апреля 2018 12:20">
+    </div>
+  </div>
+  <div>
+    <label >Выберите цвет волос </label>
+    <select id="color" name="color">
+      <option value="#7bd148">Green</option>
+      <option value="#5484ed">Bold blue</option>
+      <option value="#a4bdfc">Blue</option>
+      <option value="#46d6db">Turquoise</option>
+      <option value="#7ae7bf">Light green</option>
+      <option value="#51b749">Bold green</option>
+      <option value="#fbd75b">Yellow</option>
+      <option value="#ffb878">Orange</option>
+      <option value="#ff887c">Red</option>
+      <option value="#dc2127">Bold red</option>
+      <option value="#dbadff">Purple</option>
+      <option value="#e1e1e1">Gray</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Записаться</button> 
+</form>
+<p><%= @message_save_visit %></p>
+
+<script  type="text/javascript">
+  $(function() {
+    $('#color').simplecolorpicker();
+  });
+  
+</script>

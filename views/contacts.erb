@@ -1,0 +1,14 @@
+<h2>Contacts</h2>
+<p>Напишите нам :</p>
+<form action="/contacts" method="post">
+  <div class="form-group">
+    <label for="form_email">Введите Ваш Email-адрес: </label>
+    <input type="email" name="message_email" class="form-control" id="form_email" placeholder="name@example.com">
+  </div>
+  <div class="form-group">
+    <label for="textarea_1">Текст сообщения: </label>
+    <textarea  name="message_text" class="form-control" id="textarea_1" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+<h3><%= @message_save_contacts %></h3>

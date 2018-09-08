@@ -1,0 +1,23 @@
+<h3>Приветствуем вас на служебной странице </h3>
+<p>Введите пароль для доступа к служебной информации</p>
+<form action="/admin" method="post">
+  <div class="form-group">
+    <label for="pass">Пароль: </label>
+    <input name="pass_admin" type="password" class="form-control" id="pass" placeholder="123">
+  </div>
+  <button type="submit" class="btn btn-primary">Вход</button>
+</form>
+<h3><%= @error_pass_admin %></h3>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>План посещений:</h3>
+      <%= @intput_visit %>
+    </div>
+    <div class="col">
+      <h3>Собщения: </h3>
+      <%= @intput_contacts %>
+    </div>
+  </div>
+</div>
