@@ -23,24 +23,27 @@ get '/admin' do
 end
 
 post '/visit' do
-	@master = params[ :master]
-	@name = params[ :name]
-	@pfone = params[ :pfone]
-	@data_time = params[ :data_time]
-	@color = params[ :color]
+	@master      = params[ :master]
+	@name        = params[ :name]
+	@pfone       = params[ :pfone]
+	@data_time   = params[ :data_time]
+	@color       = params[ :color]
+
+	#хеш сообщений об ошибке
+	hh={ :name       => "Введите имя",
+       :pfone      => "Введите телефон",
+       :data_time  => "Введите дату"
+	}
+
+	hh.each do |key,value|
+	  if params[key]==''
+		  # @eerror переменная об ощибке, нправляетися в вмд
+			@error=hh[key]
+			erb :visit
+		end	
+	end
 	
-	if @name==''
-		@error="Введите имя"
-	end
-	if @pfone==''
-		@error="Введите телефон"
-	end
-	if @data_time==''
-		@error="Введите дату"
-	end
-	if @error !=''
-		erb :visit
-	  else
+	if @name !="" && @pfone!="" && @data_time!=""
 	  	output=File.open "./public/visit.txt","a"
 	    output.write "Master: #{@master}, Visiter: #{@name} ,Color : #{@color} pfone: #{@pfone}, date & time #{@data_time}<br>"
 	    output.close
