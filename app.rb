@@ -74,12 +74,13 @@ post '/contacts' do
     :port                 => '25', 
     :enable_starttls_auto => true, 
     :user_name            => "kvronin@gmail.com", 
-    :password             => 'vgy121823plp', 
+    :password             => 'сменил', 
     :authentication       => :plain, 
     :domain               => '127.0.0.1:4567'
     }
   )
 	  @message_save_contacts="Ваше сообщение отправлено "
+	  @intput_contacts= "У вас новые сообщения на электронной почте"
 	  erb :contacts
 	end
 
