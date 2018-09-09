@@ -35,12 +35,9 @@ post '/visit' do
        :data_time  => "Enter date and time",
 	}
 
-	hh.each do |key,value|
-	  if params[key] == ''
-		  # @eerror переменная об ощибке, нправляетися в вмд
-			@error = hh[key]
-			return erb :visit
-		end
+	@error=hh.select{|key,_| params[key]==''}.values.join(', ')
+	if @error !=''
+		return erb :visit
 	end
 	
 	if @name !="" and @pfone!="" and @data_time!=""
@@ -55,11 +52,24 @@ end
 post '/contacts' do
 	@message_email = params[ :message_email]
 	@message_text = params[ :message_text]
-	output=File.open "./public/contacts.txt","a"
-	output.write "Email: #{@message_email}<br> Text message:<br> <p>#{@message_text}<p/><br>"
-	output.close
-  @message_save_contacts="Ваше сообщение отправлено "
-  erb :contacts
+
+	hh={ :message_email       =>  "Enter Email",
+       :message_text        =>  "Enter text",
+	}
+
+	@error=hh.select{|key,_| params[key]==''}.values.join(', ')
+	if @error !=''
+		return erb :contacts
+	end
+
+	if @message_email !="" and @message_text !=""
+		output=File.open "./public/contacts.txt","a"
+		output.write "Email: #{@message_email}<br> Text message:<br> <p>#{@message_text}<p/><br>"
+		output.close
+	  @message_save_contacts="Ваше сообщение отправлено "
+	  erb :contacts
+	end
+
 end
 
 post '/admin' do
