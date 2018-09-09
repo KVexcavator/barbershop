@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require './public/pony.rb'
 
 get '/' do
 	erb "Hello!"			
@@ -63,9 +64,21 @@ post '/contacts' do
 	end
 
 	if @message_email !="" and @message_text !=""
-		output=File.open "./public/contacts.txt","a"
-		output.write "Email: #{@message_email}<br> Text message:<br> <p>#{@message_text}<p/><br>"
-		output.close
+  Pony.mail(
+	  :from => params[ :message_email],
+	  :body => params[ :message_text],
+	  :to => 'kv_fam@mail.ru',
+	  :via => :smtp,
+	  :via_options => { 
+	  :address              => 'smtp.gmail.com', 
+    :port                 => '25', 
+    :enable_starttls_auto => true, 
+    :user_name            => "kvronin@gmail.com", 
+    :password             => 'vgy121823plp', 
+    :authentication       => :plain, 
+    :domain               => '127.0.0.1:4567'
+    }
+  )
 	  @message_save_contacts="Ваше сообщение отправлено "
 	  erb :contacts
 	end
