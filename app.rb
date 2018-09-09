@@ -7,7 +7,6 @@ get '/' do
 end
 
 get '/about' do
-	@error = "ERROR TEST"
 	erb :about			
 end
 
@@ -29,11 +28,16 @@ post '/visit' do
 	@pfone = params[ :pfone]
 	@data_time = params[ :data_time]
 	@color = params[ :color]
-	output=File.open "./public/visit.txt","a"
-	output.write "Master: #{@master}, Visiter: #{@name} ,Color : #{@color} pfone: #{@pfone}, date & time #{@data_time}<br>"
-	output.close
-  @message_save_visit="Уважаемый #{@name}, Ваша запись сохранена, ждём Вас #{@data_time}."
-  erb :visit
+	if @master=='' || @name=='' || @pfone=='' || @data_time=='' || @color==''
+		@error="Ваши данные введены не коректно"
+		erb :visit
+	else
+		output=File.open "./public/visit.txt","a"
+		output.write "Master: #{@master}, Visiter: #{@name} ,Color : #{@color} pfone: #{@pfone}, date & time #{@data_time}<br>"
+		output.close
+	  @message_save_visit="Уважаемый #{@name}, Ваша запись сохранена, ждём Вас #{@data_time}."
+	  erb :visit
+  end
 end
 
 post '/contacts' do
