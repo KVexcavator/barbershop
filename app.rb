@@ -4,14 +4,18 @@ require 'sinatra/reloader'
 require './public/pony.rb'
 require 'sqlite3'
 
+def get_db
+	return SQLite3::Database.new 'bbs.sqlite'
+end
+
 configure do
-	@db=SQLite3::Database.new 'bbs.sqlite'
-	@db.execute "CREATE TABLE IF NOT EXISTS 
+	db=get_db
+	db.execute "CREATE TABLE IF NOT EXISTS 
 	`visit` (
 						`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 						`name`	VARCHAR,
 						`pfone`	VARCHAR,
-						`date_time`	VARCHAR,
+						`datestamp`	VARCHAR,
 						`master`	VARCHAR,
 						`color`	VARCHAR
 					)"
@@ -56,9 +60,11 @@ post '/visit' do
 	end
 	
 	if @name !="" and @pfone!="" and @data_time!=""
-	  	output=File.open "./public/visit.txt","a"
-	    output.write "Master: #{@master}, Visiter: #{@name} ,Color : #{@color} pfone: #{@pfone}, date & time #{@data_time}<br>"
-	    output.close
+			
+			db=get_db
+			db.execute "INSERT INTO visit (name,pfone,datestamp,master,color)
+			VALUES (?,?,?,?,?)",[ @name, @pfone, @data_time, @master, @color ]
+
 	    @message_save_visit="Уважаемый #{@name}, Ваша запись сохранена, ждём Вас #{@data_time}."
 	    erb :visit
 	end
