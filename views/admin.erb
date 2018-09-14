@@ -13,10 +13,7 @@
   <div class="row">
     <div class="col">
       <h3>План посещений:</h3>
-      <% @intput_visit.each do |row|%>
-        <%= "#{row[1]},#{row[2]},#{row[3]},#{row[4]},#{row[5]}," %>
-        <%= '<br>' %>
-      <% end %>
+      <%= @intput_visit %>
     </div>
     <div class="col">
       <h3>Собщения: </h3>

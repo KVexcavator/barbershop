@@ -112,8 +112,10 @@ post '/admin' do
 	if @pass_admin=="123"
 
 		db=get_db
+		db.results_as_hash=true
 		@intput_visit=[]
-	  db.execute "SELECT * FROM visit" do |row|
+
+		db.execute "SELECT * FROM visit" do |row|
 				@intput_visit << row	
 		end	
 		
