@@ -2,6 +2,20 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
 require './public/pony.rb'
+require 'sqlite3'
+
+configure do
+	@db=SQLite3::Database.new 'bbs.sqlite'
+	@db.execute "CREATE TABLE IF NOT EXISTS 
+	`visit` (
+						`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+						`name`	VARCHAR,
+						`pfone`	VARCHAR,
+						`date_time`	VARCHAR,
+						`master`	VARCHAR,
+						`color`	VARCHAR
+					)"
+end
 
 get '/' do
 	erb "Hello!"			
