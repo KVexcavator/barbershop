@@ -11,6 +11,8 @@ end
 #configure вызывается один раз при изменениии приложения
 configure do
 	db=get_db
+
+	
 	db.execute "CREATE TABLE IF NOT EXISTS 
 	`visit` (
 						`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -20,6 +22,20 @@ configure do
 						`master`	VARCHAR,
 						`color`	VARCHAR
 					)"
+	
+	 db.execute "DROP TABLE IF EXISTS 'masters'"
+	 db.execute "CREATE TABLE IF NOT EXISTS 
+	 `masters` (
+	 					`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	 					`name`	TEXT,
+	 					`pfone`	TEXT,
+	 					`addres`	TEXT
+	 				);"
+	 db.execute "INSERT INTO masters (name,pfone,addres) VALUES('Master','45 67 89','Green str 4')"
+	 db.execute "INSERT INTO masters (name,pfone,addres) VALUES('Lenka Krivorukaya','45 67 32','Rad str 43')"
+	 db.execute "INSERT INTO masters (name,pfone,addres) VALUES('Mariya Ivanobna','56 89 40','Green str 41')"
+	 db.execute "INSERT INTO masters (name,pfone,addres) VALUES('Eduard Pedrilo','44 77 00','Orange str 2')"
+	 db.execute "INSERT INTO masters (name,pfone,addres) VALUES('Slesar-Santehnik','55 78 89','Blue str 12')"
 end
 
 get '/' do
@@ -113,10 +129,12 @@ post '/admin' do
 
 		db=get_db
 		db.results_as_hash=true
-		@intput_visit=[]
+		array=[]
 
 		db.execute "SELECT * FROM visit" do |row|
-				@intput_visit << row	
+				array.push row
+				@intput_visit=array[0]['name']	
+				#@intput_visit=array.select{|row| row}.join('<br>')	
 		end	
 		
 		#@intput_contacts=File.read "./public/contacts.txt"
