@@ -28,7 +28,7 @@
   <div class="form-group row">
     <label for="data_time"class="col-sm-2 col-form-label col-form-label-sm">Дата и время</label>
     <div class="col-sm-10">
-      <input type="text"  name="data_time"  value="<%= @data_time %>" class="form-control form-control-sm" id="data_time" placeholder="Введите дату и время, например : 16 апреля 2018 12:20">
+      <input type="text"  name="data_time"  value="<%= @data_time %>" class="form-control form-control-sm" id="data_time" placeholder="Введите дату и время">
     </div>
   </div>
   <div>
@@ -55,6 +55,8 @@
 <script  type="text/javascript">
   $(function() {
     $('#color').simplecolorpicker();
+    $('#data_time').datetimepicker();
+
   });
   
 </script>

@@ -8,6 +8,7 @@ def get_db
 	return SQLite3::Database.new 'bbs.sqlite'
 end
 
+#configure вызывается один раз при изменениии приложения
 configure do
 	db=get_db
 	db.execute "CREATE TABLE IF NOT EXISTS 
