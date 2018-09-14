@@ -6,11 +6,11 @@
 		  <label class="col-sm-2 col-form-label col-form-label-sm"
 		   for="master">Выберите мастера</label>
 		  <select  name="master" class="custom-select my-1 mr-sm-2" id="master">
-		    <option selected> Мастер </option>
-		    <option value="Lenka Krivorukaya">Ленка Криворукая</option>
-		    <option value="Mariya Ivanobna">Мария Ивановна</option>
-		    <option value="Eduard Pedrilo">Эдуард Педрило</option>
-		    <option value="Slesar-Santehnik">Слесарь-сантежник</option>
+		    <option <%= @master=='Master'? 'selected': '' %>> Master </option>
+		    <option <%= @master=='Lenka Krivorukaya'? 'selected': '' %>>Lenka Krivorukaya</option>
+		    <option <%= @master=='Mariya Ivanobna'? 'selected': '' %>>Mariya Ivanobna</option>
+		    <option <%= @master=='Eduard Pedrilo'? 'selected': '' %>>Eduard Pedrilo</option>
+		    <option <%= @master=='Slesar-Santehnik'? 'selected': '' %>>Slesar-Santehnik</option>
 		  </select>
 		</div>
   <div class="form-group row">
