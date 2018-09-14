@@ -110,11 +110,17 @@ end
 post '/admin' do
 	@pass_admin= params[ :pass_admin]
 	if @pass_admin=="123"
-		@intput_visit=File.read "./public/visit.txt"
-		@intput_contacts=File.read "./public/contacts.txt"
+
+		db=get_db
+		@intput_visit=[]
+	  db.execute "SELECT * FROM visit" do |row|
+				@intput_visit << row	
+		end	
+		
+		#@intput_contacts=File.read "./public/contacts.txt"
 		erb :admin	
 	elsif
-		@error_pass_admin="Неверный пароль, гапряги память рпидурок"
+		@error_pass_admin="Неверный пароль, напряги память придурок"
 		erb :admin
 	end
 
