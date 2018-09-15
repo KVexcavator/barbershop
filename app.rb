@@ -126,22 +126,19 @@ end
 post '/admin' do
 	@pass_admin= params[ :pass_admin]
 	if @pass_admin=="123"
-
-		db=get_db
-		db.results_as_hash=true
-		array=[]
-
-		db.execute "SELECT * FROM visit" do |row|
-				array.push row
-				@intput_visit=array[0]['name']	
-				#@intput_visit=array.select{|row| row}.join('<br>')	
-		end	
-		
-		#@intput_contacts=File.read "./public/contacts.txt"
-		erb :admin	
+		@message_admin="<a ><a href='showinfo'>Перейти к информации</a>"
+	  erb :admin
 	elsif
-		@error_pass_admin="Неверный пароль, напряги память придурок"
+		@message_admin="Неверный пароль, напряги память придурок"
 		erb :admin
 	end
 
+end
+
+get '/showinfo' do
+	db=get_db
+	db.results_as_hash=true
+	@results=db.execute "SELECT * FROM visit ORDER BY id DESC"
+
+  erb :showinfo
 end

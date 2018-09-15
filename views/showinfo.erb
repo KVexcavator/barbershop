@@ -1,0 +1,30 @@
+
+<h3>План посещений:</h3>
+<%= @results %>
+
+<table class="table">
+<thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Номер телефона</th>
+      <th scope="col">Дата и время</th>
+      <th scope="col">Мастер</th>
+      <th scope="col">Цвет</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% i=1 %>
+  <%  @results.each do |row|  %>
+    <tr>
+      <th scope="row"><%= i %></th>
+      <td><%= row['name']%></td>
+      <td><%= row['pfone']%></td>
+      <td><%= row['datestamp']%></td>
+      <td><%= row['master']%></td>
+      <td><%= row['color']%></td>
+    </tr>
+    <% i+=i %>
+  <% end %>  
+  </tbody>
+</table>
