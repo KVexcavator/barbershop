@@ -47,6 +47,10 @@ get '/about' do
 end
 
 get '/visit' do
+	db=get_db
+	db.results_as_hash=true
+	@results=db.execute "SELECT * FROM masters ORDER BY id DESC"
+
 	erb :visit			
 end
 
