@@ -53,10 +53,7 @@ get '/about' do
 end
 
 get '/visit' do
-	db=get_db
-	db.results_as_hash=true
-	@results=db.execute "SELECT * FROM masters ORDER BY id DESC"
-
+	
 	erb :visit			
 end
 
@@ -92,8 +89,8 @@ post '/visit' do
 			db.execute "INSERT INTO visit (name,pfone,datestamp,master,color)
 			VALUES (?,?,?,?,?)",[ @name, @pfone, @data_time, @master, @color ]
 
-	    @message_save_visit="Уважаемый #{@name}, Ваша запись сохранена, ждём Вас #{@data_time}."
-	    erb :visit
+	    
+	    erb "<h2>Уважаемый #{@name}, Ваша запись сохранена, ждём Вас #{@data_time}.<h2/>"
 	end
 end
 
