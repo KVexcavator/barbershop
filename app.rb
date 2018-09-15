@@ -8,6 +8,12 @@ def get_db
 	return SQLite3::Database.new 'bbs.sqlite'
 end
 
+before do
+	db=get_db
+	db.results_as_hash=true
+	@results=db.execute "SELECT * FROM masters"
+end
+
 #configure вызывается один раз при изменениии приложения
 configure do
 	db=get_db
